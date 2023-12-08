@@ -1,0 +1,11 @@
+# created by virtualenv automatically
+include
+Lib
+Scripts
+var
+config.py
+project.db
+*/__pycache__
+__pycache__
+.idea
+
