@@ -1,5 +1,6 @@
 import bcrypt
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_login import login_user, logout_user
 from werkzeug.security import generate_password_hash
 from models import User, db
 
@@ -16,8 +17,9 @@ def login():
 
         if not user or not bcrypt.checkpw(password.encode(), user.password):
             flash('Incorrect credential')
-            return redirect(url_for('auth.login'))
 
+            return redirect(url_for('auth.login'))
+        login_user(user)
         return redirect('profile')
 
     return render_template('login.html')
@@ -52,7 +54,8 @@ def signup():
 
 @auth.route('/logout')
 def logout():
-    return render_template('logout.html')
+    logout_user()
+    return redirect(url_for('auth.login'))
 
 
 
