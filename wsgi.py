@@ -1,3 +1,5 @@
 __all__ = ("app",)
 
-from main import app
+from project import create_app
+
+app = create_app()

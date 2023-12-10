@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="title">
+    Hello, {{name}}
+</h1>
+<h1>Upload a File</h1>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+    <h2>Uploaded Files</h2>
+    <h3>Free space</h3>
+    <h4>{{total}}   |   {{used}}    |   {{free}}</h4>
+    <ul>
+        {% for filename in filenames %}
+        <li>
+
+            <a href="{{ url_for('main.download_file', filename=filename) }}">{{ filename}}</a>
+            <a href="{{ url_for('main.delete_file', filename=filename) }}" class="delete-link">(Delete)</a>
+                <input type="text" id="fileLink" value="{{ url_for('main.upload_file', filename=filename) }}" style="display: none;">
+        </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
